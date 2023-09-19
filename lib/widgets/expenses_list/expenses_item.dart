@@ -1,10 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:expensetracker/models/expense.dart';
+
 class ExpenseItem extends StatelessWidget {
   const ExpenseItem({super.key, required this.expense});
-final Expense expense;
+
+  final Expense expense;
+
   @override
   Widget build(BuildContext context) {
-    return Card(child:Text(expense.title),);
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 16,
+        ),
+        child: Column(
+          children: [
+            Text(expense.title),
+            const SizedBox(
+              height: 5,
+            ),
+            Row(
+              children: [
+                Text('\$${expense.amount.toStringAsFixed(2)}'),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
