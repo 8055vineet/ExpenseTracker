@@ -9,9 +9,9 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
-  final  List<expense>_registeredExpenses=[
-    expense(title: "clothes", amount: 1500, date: DateTime.now(), category:Category.work),
-    expense(title: "cricket", amount: 2300, date: DateTime.now(), category:Category.leisure),
+  final  List<Expense>_registeredExpenses=[
+    Expense(title: "clothes", amount: 1500, date: DateTime.now(), category:Category.work),
+    Expense(title: "cricket", amount: 2300, date: DateTime.now(), category:Category.leisure),
   ];
 
 
