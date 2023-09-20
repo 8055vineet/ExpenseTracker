@@ -3,55 +3,88 @@ import 'package:flutter/material.dart';
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key});
 
-
   @override
   State<NewExpense> createState() => _NewExpenseState();
 }
 
-
 class _NewExpenseState extends State<NewExpense> {
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
+  void _presentDatePicker(){
+    final now=DateTime.now();
+    final firstDate=DateTime(now.year-1,now.month,now.day);
+    showDatePicker(context: context, initialDate: now, firstDate: firstDate, lastDate: now);
+  }
 
-  final _titleController=TextEditingController();
-  final _amountController=TextEditingController();
- void dispose(){
-   _titleController.dispose();
-   _amountController.dispose();
-   super.dispose();
- }
+
+  void dispose() {
+    _titleController.dispose();
+    _amountController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(context) {
-    return  Padding(
+    return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          TextField(controller: _titleController,
+          TextField(
+            controller: _titleController,
             maxLength: 50,
             decoration: const InputDecoration(
                 label: Text(
-                  "Title",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )),
+              "Title",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            )),
           ),
-          TextField(controller: _amountController,
-         keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-               prefixText: '\$ ',
-                label: Text(
-                  "Amount",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )),
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _amountController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                      prefixText: '\$ ',
+                      label: Text(
+                        "Amount",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      )),
+                ),
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              Expanded(
+                child: Row( mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text('Select Date'),
+                    IconButton(
+                      onPressed: _presentDatePicker,
+                      icon: const Icon(Icons.calendar_month),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Row(children: [
-            ElevatedButton(onPressed: () {
-              Navigator.pop(context);
-              print(_titleController.text);
+          Row(
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
 
-            }, child: Text('cancel')),
-            ElevatedButton(onPressed: () {
-              print(_amountController.text);
-
-            }, child: const Text('save amount'))
-          ],),
+                  },
+                  child: Text('cancel')),
+              ElevatedButton(
+                  onPressed: () {
+                    print(_amountController.text);
+                    print(_titleController.text);
+                  },
+                  child: const Text('save amount'))
+            ],
+          ),
         ],
       ),
     );
