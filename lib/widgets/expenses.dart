@@ -1,6 +1,8 @@
 import 'package:expensetracker/models/expense.dart';
+import 'package:expensetracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 import 'package:expensetracker/widgets/expenses_list/expenses_list.dart';
+import 'package:expensetracker/widgets/new_expense.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -23,8 +25,8 @@ class _ExpensesState extends State<Expenses> {
         category: Category.leisure),
   ];
 void _openAddExpenseOverLay(){
-  showBottomSheet(context: context, builder: (ctx){return SizedBox(height: 100,);})
-  ;
+  showModalBottomSheet(backgroundColor: Colors.white10 ,context: context, builder: (ctx){
+    return  const NewExpense();});
 }
   @override
   Widget build(context) {
