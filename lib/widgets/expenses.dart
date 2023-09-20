@@ -22,17 +22,20 @@ class _ExpensesState extends State<Expenses> {
         date: DateTime.now(),
         category: Category.leisure),
   ];
-
+void _openAddExpenseOverLay(){
+  showBottomSheet(context: context, builder: (ctx){return SizedBox(height: 100,);})
+  ;
+}
   @override
   Widget build(context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Flutter Expense Tracker'),
+          title: const Text('Flutter Expense Tracker'),
 
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.add),
+            onPressed:_openAddExpenseOverLay,
+            icon: const Icon(Icons.add),
           ),
         ],
     ),
