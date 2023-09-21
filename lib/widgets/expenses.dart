@@ -25,7 +25,7 @@ class _ExpensesState extends State<Expenses> {
         category: Category.leisure),
   ];
 void _openAddExpenseOverLay(){
-  showModalBottomSheet(backgroundColor: Colors.white10 ,context: context, builder: (ctx){
+  showModalBottomSheet( backgroundColor: Colors.white10 ,context: context, builder: (ctx){
     return  const NewExpense();});
 }
   @override
