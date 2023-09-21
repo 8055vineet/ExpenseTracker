@@ -28,14 +28,34 @@ class _NewExpenseState extends State<NewExpense> {
       _selectedDate = pickedDate;
     });
   }
-void _submitExpenseData(){
-    final enteredAmount=double.tryParse(_amountController.text);
-    final amountIsInvalid=enteredAmount==null||enteredAmount<=0;
-    if(_titleController.text.trim().isEmpty||amountIsInvalid||_selectedDate==null)
-      {
 
-      }
-}
+  void _submitExpenseData() {
+    final enteredAmount = double.tryParse(_amountController.text);
+    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+    if (_titleController.text.trim().isEmpty ||
+        amountIsInvalid ||
+        _selectedDate == null) {
+      showDialog(
+                      context: context,
+                      builder: (ctx) {
+            return AlertDialog(
+              title: const Text('Invalid Input'),
+              content: const Text('Please recheck the entered values'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                     Navigator.pop(ctx);
+                  },
+                  child: const Text("okay"),
+                )
+              ],
+            );
+          },
+      );
+      //return;
+    }
+  }
+
   void dispose() {
     _titleController.dispose();
     _amountController.dispose();
@@ -121,9 +141,8 @@ void _submitExpenseData(){
                   child: Text('cancel')),
               const Spacer(),
               ElevatedButton(
-                onPressed: () {
-                  _submitExpenseData;
-                },
+                onPressed:_submitExpenseData,
+
                 child: const Text('save amount'),
               ),
             ],
