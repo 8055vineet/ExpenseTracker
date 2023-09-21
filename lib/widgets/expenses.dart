@@ -29,6 +29,11 @@ class _ExpensesState extends State<Expenses> {
       _registeredExpenses.add(expense);
     });}
 
+  void _removeExpense(Expense expense){
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });}
+
 void _openAddExpenseOverLay(){
   showModalBottomSheet( backgroundColor: Colors.white10 ,context: context, builder: (ctx){
     return NewExpense(onAddExpense: _addExpense);
@@ -51,7 +56,7 @@ void _openAddExpenseOverLay(){
         body: Column(
           children: [
             const Text("The chart"),
-            Expanded(child: ExpensesList(expenses: _registeredExpenses)),
+            Expanded(child: ExpensesList(expenses: _registeredExpenses,onRemoveExpense: _removeExpense,)),
           ],
         ));
   }
