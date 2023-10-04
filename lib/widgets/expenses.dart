@@ -24,39 +24,71 @@ class _ExpensesState extends State<Expenses> {
         date: DateTime.now(),
         category: Category.leisure),
   ];
-  void _addExpense(Expense expense){
+
+  void _addExpense(Expense expense) {
     setState(() {
       _registeredExpenses.add(expense);
-    });}
+    });
+  }
 
-  void _removeExpense(Expense expense){
+  void _removeExpense(Expense expense) {
+    int index = _registeredExpenses.indexOf(expense);
     setState(() {
       _registeredExpenses.remove(expense);
-    });}
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Expense Deleted"),
+        duration: Duration(seconds: 3),
+        action: SnackBarAction(
+          label: "undo",
+          onPressed: (){
+            setState(
+                  () {
+                _registeredExpenses.insert(index, expense);
+              },
+            );
+          }
+        ),
+      ),
+    );
+  }
 
-void _openAddExpenseOverLay(){
-  showModalBottomSheet( backgroundColor: Colors.white10 ,context: context, builder: (ctx){
-    return NewExpense(onAddExpense: _addExpense);
-    });}
-
+  void _openAddExpenseOverLay() {
+    showModalBottomSheet(
+        backgroundColor: Colors.brown,
+        context: context,
+        builder: (ctx) {
+          return NewExpense(onAddExpense: _addExpense);
+        });
+  }
 
   @override
   Widget build(context) {
+    Widget maincontent = const Center(
+      child: Text("No data found"),
+    );
+    if (_registeredExpenses.isNotEmpty) {
+      maincontent = ExpensesList(
+        expenses: _registeredExpenses,
+        onRemoveExpense: _removeExpense,
+      );
+    }
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Flutter Expense Tracker'),
-
-        actions: [
-          IconButton(
-            onPressed:_openAddExpenseOverLay,
-            icon: const Icon(Icons.add),
-          ),
-        ],
-    ),
+          actions: [
+            IconButton(
+              onPressed: _openAddExpenseOverLay,
+              icon: const Icon(Icons.add),
+            ),
+          ],
+        ),
         body: Column(
           children: [
             const Text("The chart"),
-            Expanded(child: ExpensesList(expenses: _registeredExpenses,onRemoveExpense: _removeExpense,)),
+            Expanded(child: maincontent),
           ],
         ));
   }
