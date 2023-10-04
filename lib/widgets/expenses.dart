@@ -56,7 +56,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverLay() {
     showModalBottomSheet(
-        backgroundColor: Colors.brown,
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         context: context,
         builder: (ctx) {
           return NewExpense(onAddExpense: _addExpense);
