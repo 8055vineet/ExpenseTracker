@@ -14,12 +14,12 @@ class Expenses extends StatefulWidget {
 class _ExpensesState extends State<Expenses> {
   final List<Expense> _registeredExpenses = [
     Expense(
-        title: "clothes",
+        title: "Clothes",
         amount: 1500,
         date: DateTime.now(),
         category: Category.work),
     Expense(
-        title: "cricket",
+        title: "Cricket",
         amount: 2300,
         date: DateTime.now(),
         category: Category.leisure),
@@ -56,7 +56,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverLay() {
     showModalBottomSheet(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: Color.fromARGB(255, 4, 4, 4),
         context: context,
         builder: (ctx) {
           return NewExpense(onAddExpense: _addExpense);
