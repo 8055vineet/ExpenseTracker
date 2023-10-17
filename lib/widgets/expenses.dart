@@ -2,7 +2,7 @@ import 'package:expensetracker/models/expense.dart';
 import 'package:expensetracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 import 'package:expensetracker/widgets/expenses_list/expenses_list.dart';
-import 'package:expensetracker/widgets/new_expense.dart';
+import 'package:expensetracker/widgets/chart/chart.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -38,8 +38,8 @@ class _ExpensesState extends State<Expenses> {
     });
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text("Expense Deleted"),
-        duration: Duration(seconds: 3),
+        content: const Text("Expense Deleted"),
+        duration: const Duration(seconds: 3),
         action: SnackBarAction(
           label: "undo",
           onPressed: (){
@@ -56,7 +56,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverLay() {
     showModalBottomSheet(
-        backgroundColor: Color.fromARGB(255, 4, 4, 4),
+        backgroundColor: const Color.fromARGB(255, 4, 4, 4),
         context: context,
         builder: (ctx) {
           return NewExpense(onAddExpense: _addExpense);
@@ -87,7 +87,7 @@ class _ExpensesState extends State<Expenses> {
         ),
         body: Column(
           children: [
-            const Text("The chart"),
+            Chart(expenses: _registeredExpenses),
             Expanded(child: maincontent),
           ],
         ));
